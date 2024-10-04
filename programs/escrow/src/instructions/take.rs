@@ -36,7 +36,6 @@ pub struct Take<'info> {
         payer = taker,
         associated_token::mint = mint_b,
         associated_token::authority = maker,
-        associated_token::token_program = token_program,
     )]
     pub maker_ata_b: InterfaceAccount<'info, TokenAccount>, // for receiving the token(mint) from the taker
     #[account(
