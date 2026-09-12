@@ -7,14 +7,13 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-escrow = "49gLH2qk1djQLGBwBc89YKgU7sqx4QoCLnTq7J9wEwkE"
-
-[registry]
-url = "https://api.apr.dev"
+escrow = "8aFsMHXSjEW2wViLdBjYCnVexXCjAq13KowoABFrT6Hs"
 
 [provider]
-cluster = "Localnet"
+cluster = "localnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
 test = "cargo test"
+
+[hooks]

@@ -84,8 +84,12 @@ impl<'info> Take<'info> {
         let maker = self.maker.key();
         let seed = self.escrow.seed.to_le_bytes();
 
-        let signer_seeds: [&[&[u8]]; 1] =
-            [&[ESCROW_SEED, maker.as_ref(), seed.as_ref(), &[self.escrow.bump]]];
+        let signer_seeds: [&[&[u8]]; 1] = [&[
+            ESCROW_SEED,
+            maker.as_ref(),
+            seed.as_ref(),
+            &[self.escrow.bump],
+        ]];
 
         let cpi_accounts = TransferChecked {
             from: self.vault.to_account_info(),
