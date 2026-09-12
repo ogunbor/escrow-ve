@@ -11,24 +11,24 @@ pub struct Escrow {
     pub mint_b: Pubkey,
     pub receive: u64,
     pub bump: u8,
-    pub expiration: i64,
+    pub expiration: i64, 
     pub created_at: i64,
 }
 
 impl Escrow {
-    /// Errors out once `expiration` has passed. `expiration == 0` is treated
-    /// as "never expires".
-    pub fn check_expiry(&self) -> Result<()> {
+    pub fn check_not_expired(&self) -> Result<()> {
         require!(
-            self.expiration == 0 || Clock::get()?.unix_timestamp < self.expiration,
-            EscrowError::Expired
+            Clock::get()?.unix_timestamp <= self.created_at + self.expiration,
+            EscrowError::EscrowExpired
         );
         Ok(())
     }
 
-    pub fn set_expiry(&mut self, expiration: i64) -> Result<()> {
-        require!(expiration >= 0, EscrowError::InvalidExpiry);
-        self.expiration = expiration;
+    pub fn check_expired(&self) -> Result<()> {
+        require!(
+            Clock::get()?.unix_timestamp >= self.created_at + self.expiration,
+            EscrowError::EscrowNotExpired
+        );
         Ok(())
     }
 }
