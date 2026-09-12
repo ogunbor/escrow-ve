@@ -8,6 +8,9 @@ pub use state::*;
 pub mod errors;
 pub use errors::*;
 
+pub mod constants;
+pub use constants::*;
+
 pub mod instructions;
 pub use instructions::*;
 
@@ -15,8 +18,15 @@ pub use instructions::*;
 pub mod escrow {
     use super::*;
 
-    pub fn initialize(ctx: Context<Make>, seed: u64, receive: u64, deposit: u64) -> Result<()> {
-        ctx.accounts.init_escrow(seed, receive, &ctx.bumps)?;
+    pub fn initialize(
+        ctx: Context<Make>,
+        seed: u64,
+        receive: u64,
+        deposit: u64,
+        expiration: i64,
+    ) -> Result<()> {
+        ctx.accounts
+            .init_escrow(seed, receive, &ctx.bumps, expiration)?;
         ctx.accounts.deposit(deposit)
     }
     pub fn refund(ctx: Context<Refund>) -> Result<()> {
