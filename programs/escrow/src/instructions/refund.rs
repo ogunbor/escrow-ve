@@ -1,11 +1,8 @@
 use anchor_lang::prelude::*;
 
-use anchor_spl::{
-    associated_token::AssociatedToken,
-    token_interface::{
-        close_account, transfer_checked, CloseAccount, Mint, TokenAccount, TokenInterface,
-        TransferChecked,
-    },
+use anchor_spl::token_interface::{
+    close_account, transfer_checked, CloseAccount, Mint, TokenAccount, TokenInterface,
+    TransferChecked,
 };
 
 use crate::{Escrow, ESCROW_SEED};
@@ -36,7 +33,6 @@ pub struct Refund<'info> {
         associated_token::authority = escrow,
     )]
     pub vault: InterfaceAccount<'info, TokenAccount>,
-    associated_token_program: Program<'info, AssociatedToken>,
     token_program: Interface<'info, TokenInterface>,
     system_program: Program<'info, System>,
 }
